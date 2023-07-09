@@ -1,25 +1,24 @@
 print(" *** Rank score ***")
 print("Enter ID and Score end with ID : ", end="")
-lst = list(map(str, input().split()))
-last_id = lst[len(lst)-1]
-lst.pop(len(lst)-1)
-print(lst)
-print(last_id)
+id_score = list(map(str, input().split()))
 
-def Convert(list):
-    res_dict = {list[i]: float(list[i+1]) for i in range(0, len(lst), 2)}
-    return res_dict
+that_std_id = id_score[-1]
+id_score = id_score[:-1]
 
-dct = Convert(lst)
-sortedDict = dict(sorted(dct.items()))
-print(sortedDict)
+print(id_score)
+print(that_std_id)
 
-if last_id in sortedDict:
-    order = 1
-    for key in sortedDict:
-        if key == last_id:
-            break
-        order += 1
-    print(order)
-else:
+id_score_dict = {}
+for i in range(0, len(id_score) - 1, 2):
+    id_score_dict[id_score[i]] = float(id_score[i + 1])
+
+print(id_score_dict)
+
+found = False
+for i in range(len(id_score)):
+    if id_score[i] == that_std_id:
+        print(i//2 + 1)
+        found = True
+
+if not found:
     print("Not Found")
