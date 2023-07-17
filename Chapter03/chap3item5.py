@@ -64,27 +64,16 @@ for i in inp:
 
         if S.isEmpty():
             num_of_trees = 0
-        else:
-            max2 = S.pop()
-            if max2%2 == 0:
-                new_max = max2-1
-                temp2.push(new_max)
-            else:
-                new_max = max2+2
-                temp2.push(new_max)
 
         while (not S.isEmpty()):
             value2 = S.pop()
             if value2%2 == 0:
-                new_value = max2-1
+                new_value = value2-1
                 temp2.push(new_value)
             else:
-                new_value = max2+2
+                new_value = value2+2
                 temp2.push(new_value)
 
-            if new_max < new_value:
-                new_max = new_value
-        
         while (not temp2.isEmpty()):
             S.push(temp2.pop())
 
