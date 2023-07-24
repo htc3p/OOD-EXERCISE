@@ -23,7 +23,10 @@ class Queue:
         self.items.append(data)
 
     def dequeue(self):
-        return self.items.pop(0)
+        if not self.isEmpty():
+            return self.items.pop(0)
+        else:
+            return None
     
     def isEmpty(self):
         return len(self.items) == 0
