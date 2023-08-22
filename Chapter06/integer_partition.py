@@ -18,8 +18,8 @@ def partitions(n, s, d=None, display=[]):
     
     return partitions(n-d, s, d, display + [str(d)]) + partitions(n, s, d-1, display)
 
-if __name__ == '__main__':
-    lines = 0
-    n, s = map(int, input('Enter n, s: ').split())
-    ways = partitions(n, s)
-    print(f'Total: {ways}')
+
+lines = 0
+n, s = map(int, input('Enter n, s: ').split())
+ways = partitions(n, s)
+print(f'Total: {ways}')
