@@ -70,6 +70,6 @@ elif err == 3:
     print(str , 'open paren(s) excess ', s.size(),': ',end='' )
     for ele in s.items:
         print(ele,sep=' ',end = '')
-        print()
+    print()
 else:
     print(str, 'MATCH')
