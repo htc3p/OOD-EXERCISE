@@ -1,129 +1,138 @@
 class Node:
-    def __init__(self, value):
-        self.value = value
+    def __init__(self, val):
+        self.val = val
         self.next = None
 
 class LinkedList:
     def __init__(self):
         self.head = None
+    
+    def __str__(self):
+        if self.isEmpty():
+            return "Empty"
+        
+        cur = self.head
+        out = ''
+        while cur is not None:
+            out += str(cur.val) + ' '
+            cur = cur.next
+        
+        return out
 
     def isEmpty(self):
         return self.head == None
-
+    
     def listLength(self):
-        curNode = self.head
-        length = 0
-        while curNode is not None:
-            length += 1
-            curNode = curNode.next
-        return length
-
-    def append(self, newNode):
-        # head=>John->None
-        if self.head is None:
-            self.head = newNode
+        cur = self.head
+        len = 0
+        while cur is not None:
+            len += 1
+            cur = cur.next
+        return len
+    
+    def addTail(self, val):
+        new = Node(val)
+        if self.isEmpty():
+            self.head = new
         else:
-            # head=>John->Ben->None || John -> Matthew
-            lastNode = self.head
-            while True:
-                if lastNode.next is None:
-                    break
-                lastNode = lastNode.next
-            lastNode.next = newNode
+            cur = self.head
+            while cur.next is not None:
+                cur = cur.next
+            cur.next = new
 
-    def addHead(self, newNode):
-        # data => Matthew, next => None
-        tempNode = self.head   # John
-        self.head = newNode    # Matthew
-        self.head.next = tempNode
-        del tempNode
+    def addHead(self, val):
+        new = Node(val)
+        if self.isEmpty():
+            self.head = new
+        else:
+            cur = self.head
+            self.head = new
+            self.head.next = cur
+            del cur
 
-    def insert(self, pos, newNode):
-        # head => 10->20->None || newNode => 15->None || pos => 1
-        if pos == 0:
-            self.addHead(newNode)
-            return 
+    def insert(self, val, pos):
         if pos < 0 or pos > self.listLength():
-            print("Invalid position")
-            return
-        
-        curNode = self.head  # 10, 20
-        curPos = 0           # 0, 1
-        while True:
-            if curPos == pos:
-                previousNode.next = newNode
-                newNode.next = curNode
-                break
-            previousNode = curNode
-            curNode = curNode.next
-            curPos += 1
-
-    def deleteHead(self):
-        if not self.isEmpty():
-            previousNode = self.head
-            self.head = self.head.next
-            previousNode.next = None
+            return 'Invalid Position'
+        elif pos == 0:
+            self.addHead(val)
+        elif pos == self.listLength():
+            self.addTail(val)
         else:
-            print("Linked list is empty. Delete failed")
+            new = Node(val)
+            cur = self.head
+            for _ in range(pos-1):
+                cur = cur.next
+            new.next = cur.next
+            cur.next = new
+            del cur
 
-    def pop(self, pos):
+    def removeHead(self):
+        if self.isEmpty():
+            return 'Empty'
+        else:
+            cur = self.head
+            self.head = cur.next
+            del cur
+
+    def removeTail(self):
+        if self.isEmpty():
+            return 'Empty'
+        else:
+            cur = self.head     # 3 4 1 2
+            while cur.next.next is not None:
+                cur = cur.next
+            cur.next = None
+            del cur
+
+    def remove(self, pos):
         if pos < 0 or pos > self.listLength():
-            print("Invalid position")
-            return
-        if not self.isEmpty():
-            if pos == 0:
-                self.deleteHead()
-                return
-            
-            # head => 10->20->15->None || pos=>1
-            curNode = self.head
-            curPos = 0
-            while True:
-                if curPos == pos:
-                    previousNode.next = curNode.next
-                    curNode.next = None
-                    break
-                previousNode = curNode
-                curNode = curNode.next
-                curPos += 1
+            return 'Invalid Position'
+        elif pos == 0:
+            self.removeHead()
+        elif pos == self.listLength():
+            self.removeTail()
         else:
-            print("List is empty") 
+            cur = self.head
+            for _ in range(pos-1):
+                cur = cur.next
+            cur.next = cur.next.next
+            del cur
 
-    def deleteEnd(self):
-        if not self.isEmpty():
-            if self.head.next is None:
-                self.deleteHead()
-                return
-            
-            # head=>John->Ben->Matthew->None
-            lastNode = self.head
-            while lastNode.next is not None:
-                previousNode = lastNode
-                lastNode = lastNode.next
-            previousNode.next = None
-        else:
-            print("Linked list is empty. Delete failed")
-            
-    def printList(self):
-        # head=>John->Ben->Matthew->None
-        if self.head is None:
-            print("List is empty")
-            return
-        curNode = self.head
-        while True:
-            if curNode is None:
-                break
-            print(curNode.value)
-            curNode = curNode.next
+    def search(self, val):
+        cur = self.head
+        while cur is not None:
+            if cur.val == val:
+                return True
+            cur = cur.next
+        return False
+    
+    def reverse(self): #6->1->3
+        prev, cur = None, self.head 
+        while cur is not None:
+            temp = cur.next     
+            cur.next = prev     
+            prev = cur         
+            cur = temp          
+        self.head = prev
 
 
-linkedList = LinkedList()
-firstNode = Node(10)
-linkedList.append(firstNode)
-secondNode = Node(20)
-linkedList.append(secondNode)
-thirdNode = Node(15)
-linkedList.append(thirdNode)
-linkedList.pop(2)
-# linkedList.deleteHead()
-linkedList.printList()
+if __name__ == '__main__':
+    ll = LinkedList()
+    ll.addTail(1)
+    ll.addTail(2)
+    ll.addTail(3)
+    ll.addTail(4)
+    ll.addHead(5)
+    ll.insert(6, 1)
+    print(ll)
+    ll.removeHead()
+    print(ll)
+    ll.removeTail()
+    print(ll)
+    ll.remove(2)
+    print(ll)
+    print(ll.search(3))
+    print(ll.search(11))
+    ll.reverse()
+    print(ll)
+    # print(ll.listLength())
