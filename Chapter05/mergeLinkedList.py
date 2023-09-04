@@ -63,7 +63,6 @@ class LinkedList:
             else:
                 cur.next = l2
                 l2 = l2.next
-
             cur = cur.next
 
         if l1:
