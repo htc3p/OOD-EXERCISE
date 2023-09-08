@@ -43,10 +43,10 @@ class LinkedList:
     def reverse(self): 
         prev, cur = None, self.head
         while cur is not None:
-            temp = cur.next     
-            cur.next = prev     
-            prev = cur         
-            cur = temp          
+            temp = cur.next
+            cur.next = prev
+            prev = cur
+            cur = temp
         self.head = prev
 
     def mergeTwoLists(self, list2):
