@@ -1,22 +1,3 @@
-class Queue:
-    def __init__(self, q = None):
-        if q == None:
-            self.item = []
-        else:
-            self.item = q
-
-    def enQueue(self, i):
-        self.item.append(i)
-
-    def deQueue(self):
-        return self.item.pop(0)
-    
-    def isEmpty(self):
-        return self.item == []
-    
-    def size(self):
-        return len(self.item)
-
 class Node:
     def __init__(self, data):
         self.data = data
