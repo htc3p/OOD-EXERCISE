@@ -58,45 +58,32 @@ class BST:
                 root.right = BST._insert(root.right, data)
         return root
     
+    def inorder(self, node):
+        if node is None:
+            return
+        
+        if node.data in ['+', '-', '*', '/']:
+            print('(', end='')
+        self.inorder(node.left)
+        print(node.data, end='')
+        self.inorder(node.right)
+        if node.data in ['+', '-', '*', '/']:
+            print(')', end='')
+    
+    def preorder(self, node):
+        if node is None:
+            return
+        
+        print(node.data, end='')
+        self.preorder(node.left)
+        self.preorder(node.right)
+    
     def printTree(self, node, level = 0):
         if node != None:
             self.printTree(node.right, level + 1)
             print('     ' * level, node)
             self.printTree(node.left, level + 1)
 
-def PostfixToInfix(expression):
-    stack = Stack()
-    
-    for char in expression:
-        if char in '+-*/':
-            op2 = stack.pop()
-            op1 = stack.pop()
-            infix_expression = f"({op1}{char}{op2})"
-            stack.push(infix_expression)
-        else:
-            stack.push(char)
-    
-    if not stack.isEmpty():
-        return stack
-    else:
-        return ""
-
-def PostfixToPrefix(expression):
-    stack = Stack()
-    
-    for char in expression:
-        if char in '+-*/':
-            op1 = stack.pop()   #b
-            op2 = stack.pop()   #a
-            prefix_expression = f"{char}{op2}{op1}" #+ab
-            stack.push(prefix_expression)
-        else:
-            stack.push(char)
-    
-    if not stack.isEmpty():
-        return stack
-    else:
-        return ""
 
 T = BST()
 S = Stack()
@@ -113,5 +100,9 @@ root = S.pop()
 print('Tree :')
 T.printTree(root)
 print('--------------------------------------------------')
-print('Infix :' , PostfixToInfix(inp))
-print('Prefix :' , PostfixToPrefix(inp))
+print('Infix :', end=' ')
+T.inorder(root)
+print()
+print('Prefix :', end=' ')
+T.preorder(root)
+print()
