@@ -16,18 +16,18 @@ class Queue:
 
 class BST:
     class Node:
-        def __init__(self, data: float) -> None:
+        def __init__(self, data):
             self.data = data
             self.left = None
             self.right = None
         
-        def __str__(self) -> str:
+        def __str__(self):
             return str(self.data)
     
     def __init__(self) -> None:
         self.root = None
     
-    def insert(self, root: Node, data: float) -> Node:
+    def insert(self, root, data):
         if not root:
             self.root = BST.Node(data)
             return self.root
@@ -40,39 +40,39 @@ class BST:
                 root.right = self.insert(root.right, data)
         return root
     
-    def min_data(self, root: Node) -> float:
+    def min_data(self, root):
         if not root:
             return
         if not root.left:
             return root.data
         return self.min_data(root.left)
     
-    def max_data(self, root: Node) -> float:
+    def max_data(self, root):
         if not root:
             return
         if not root.right:
             return root.data
         return self.max_data(root.right)
     
-    def preorder(self, root: Node) -> None:
+    def preorder(self, root):
         if root:
             print(root, end=' ')
             self.preorder(root.left)
             self.preorder(root.right)
     
-    def inorder(self, root: Node) -> None:
+    def inorder(self, root):
         if root:
             self.inorder(root.left)
             print(root, end=' ')
             self.inorder(root.right)
     
-    def postorder(self, root: Node) -> None:
+    def postorder(self, root):
         if root:
             self.postorder(root.left)
             self.postorder(root.right)
             print(root, end=' ')
     
-    def breadth(self, root: Node) -> None:
+    def breadth(self, root):
         q = Queue()
         if root:
             print(root, end=' ')
@@ -83,7 +83,7 @@ class BST:
             if not q.isEmpty():
                 self.breadth(q.deQueue())
     
-    def print_tree(self, root: Node, level: int = 0) -> None:
+    def print_tree(self, root, level= 0):
         if root != None:
             self.print_tree(root.right, level + 1)
             print('     ' * level, root)
