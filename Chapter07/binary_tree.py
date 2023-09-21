@@ -24,7 +24,7 @@ class BST:
         def __str__(self):
             return str(self.data)
     
-    def __init__(self) -> None:
+    def __init__(self):
         self.root = None
     
     def insert(self, root, data):
@@ -74,14 +74,14 @@ class BST:
     
     def breadth(self, root):
         q = Queue()
-        if root:
-            print(root, end=' ')
-            if root.left:
-                q.enQueue(root.left)
-            if root.right:
-                q.enQueue(root.right)
-            if not q.isEmpty():
-                self.breadth(q.deQueue())
+        q.enQueue(root)
+        while q.isEmpty() is not True :
+            n = q.deQueue()
+            print(n.data, end = ' ')
+            if n.left is not None:
+                q.enQueue(n.left)
+            if n.right is not None:
+                q.enQueue(n.right)
     
     def print_tree(self, root, level= 0):
         if root != None:
@@ -96,4 +96,6 @@ if __name__ == '__main__':
     root = T.insert(root, 60)
     root = T.insert(root, 70)
     root = T.insert(root, 80)
+    root = T.insert(root, 55)
     T.print_tree(root)
+    T.breadth(root)
