@@ -13,7 +13,7 @@ def findMaxIndex(lists):
     return index
 
 def selection_sort(l):
-    for i in range(len(l)-1, -1, -1):
+    for i in range(len(l)-1, 0, -1):
         if l[i] >= 0:
             max_pos = findMaxIndex(l[:i+1])
             if l[i] < l[max_pos]:
