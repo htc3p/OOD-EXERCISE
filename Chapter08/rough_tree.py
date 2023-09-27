@@ -23,4 +23,4 @@ if (n//2)+1 == len(val):
     
     print(sum(calculate_node(val, 0)))
 else:
-    print('Incorrect Input')
+    print('Incorrect Input') 
