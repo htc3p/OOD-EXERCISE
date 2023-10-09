@@ -3,6 +3,7 @@ def isomorphic(string1, string2):
         return False
     x = [string1.count(char1) for char1 in string1]
     y = [string2.count(char1) for char1 in string2]
+
     return x == y
 
 
